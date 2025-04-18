@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function Header() {
   const router = useRouter();
@@ -11,6 +12,7 @@ function Header() {
       <div className="absolute inset-0 opacity-60"></div>
 
       <div className="relative container mx-auto px-4 flex items-center justify-between">
+      <GiHamburgerMenu />
         <h1
           className="text-center text-5xl py-2 font-black hover:cursor-pointer"
           onClick={() => {
