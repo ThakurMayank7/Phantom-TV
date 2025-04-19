@@ -1,5 +1,7 @@
 export interface Banner {
-  id:string;
+  title:string;
+  description:string;
+  thumbnailURL:string;
 }
 
 export interface BannersType{

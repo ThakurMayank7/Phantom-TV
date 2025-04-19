@@ -1,21 +1,26 @@
 "use client";
 
-import { ChevronLeft, ChevronRight} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { BannersType } from "@/utils/types";
 
-
-
-const Carousel = ( {banners}:BannersType) => {
-
+const Carousel = ({ banners }: BannersType) => {
   // Memoizing the updateCounter function using useCallback
-  const slides = banners.map((banner) => (
-    <div key={banner.id} className="w-full h-full">
-        <p className="h-80">
-      sdfsdf
-
-        </p>
+  const slides = banners.map((banner, index) => (
+    <div
+      key={index}
+      className="w-full h-[80vh] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden shadow-lg relative"
+      style={{
+        backgroundImage:
+          `url(${banner.thumbnailURL})`,
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 p-6 w-full">
+        <h3 className="text-text-primary text-2xl font-bold">{banner.title}</h3>
+        <p className="text-text-secondary mt-2">{banner.description}</p>
+      </div>
     </div>
   ));
   const updateCounter = useCallback(() => {
