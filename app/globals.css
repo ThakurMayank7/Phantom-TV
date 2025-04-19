@@ -4,7 +4,97 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
+  /* Base Background Colors */
+  --color-background: #2a2a2e; /* Main app background */
+  --color-surface: #39393f; /* Card and component backgrounds */
+  --color-surface-elevated: #44444a; /* Elevated components like modals */
+  --color-surface-pressed: #33333a; /* Pressed state for interactive elements */
+  --color-surface-hover: #454550; /* Hover state for surfaces */
+
+  /* Text Colors */
+  --color-text-primary: #ededed; /* Main text color */
+  --color-text-secondary: #b0b0b0; /* Secondary text, descriptions */
+  --color-text-tertiary: #919196; /* Less important text elements */
+  --color-text-accent: #ebf29c; /* Accent text for emphasis */
+  --color-text-inverted: #2a2a2e; /* Text on accent backgrounds */
+  --color-text-disabled: #767676; /* Disabled text */
+  --color-text-link: #a6daf5; /* Hyperlinks */
+
+  /* Border Colors */
+  --color-border: #44444a; /* Standard borders */
+  --color-border-light: #545459; /* Lighter borders for contrast */
+  --color-border-focus: #ebf29c; /* Focus state borders */
+  --color-divider: #44444a; /* Divider lines */
+
+  /* Primary Brand Colors (Yellow-Lime Theme) */
+  --color-primary: #ebf29c; /* Primary brand color */
+  --color-primary-light: #f4f7c5; /* Lighter variant */
+  --color-primary-dark: #c3c979; /* Darker variant */
+  --color-primary-bg: #3c3d2c; /* Subtle background using primary */
+
+  /* Secondary Colors */
+  --color-secondary: #d97a66; /* Secondary accent color */
+  --color-secondary-light: #e49886; /* Lighter variant */
+  --color-secondary-dark: #b26453; /* Darker variant */
+  --color-secondary-bg: #3d302d; /* Subtle background using secondary */
+
+  /* State Colors */
+  --color-success: #7ab97e; /* Success states */
+  --color-success-bg: #2f3c30; /* Success background */
+  --color-warning: #f2c94c; /* Warning states */
+  --color-warning-bg: #3d3a2c; /* Warning background */
+  --color-error: #e87979; /* Error states */
+  --color-error-bg: #3e2f2f; /* Error background */
+  --color-info: #82b7d9; /* Information states */
+  --color-info-bg: #2f3a45; /* Information background */
+
+  /* UI Component Colors */
+  --color-button-primary: #ebf29c; /* Primary button */
+  --color-button-primary-hover: #f4f7c5; /* Primary button hover */
+  --color-button-primary-pressed: #c3c979; /* Primary button pressed */
+  --color-button-secondary: #39393f; /* Secondary button */
+  --color-button-secondary-hover: #44444a; /* Secondary button hover */
+  --color-button-secondary-pressed: #33333a; /* Secondary button pressed */
+  --color-button-danger: #e87979; /* Danger button */
+  --color-button-text: #2a2a2e; /* Text on buttons */
+  --color-button-disabled: #505055; /* Disabled button */
+
+  /* Icon Colors */
+  --color-icon-primary: #ededed; /* Primary icons */
+  --color-icon-secondary: #b0b0b0; /* Secondary icons */
+  --color-icon-accent: #ebf29c; /* Accent icons */
+  --color-icon-disabled: #767676; /* Disabled icons */
+
+  /* Form Controls */
+  --color-input-background: #33333a; /* Input backgrounds */
+  --color-input-border: #44444a; /* Input borders */
+  --color-input-border-focus: #ebf29c; /* Input focus borders */
+  --color-input-placeholder: #767676; /* Placeholder text */
+
+  /* Scrollbar */
+  --color-scrollbar: #44444a; /* Scrollbar */
+  --color-scrollbar-hover: #555559; /* Scrollbar hover */
+
+  /* Overlays */
+  --color-overlay: rgba(26, 26, 30, 0.7); /* Modal overlays */
+  --color-tooltip: #52525c; /* Tooltip background */
+
+  /* Shadows */
+  --color-shadow: rgba(0, 0, 0, 0.3); /* General shadow color */
+
+  /* Selection */
+  --color-selection-bg: rgba(
+    235,
+    242,
+    156,
+    0.3
+  ); /* Text selection background */
+  --color-selection-text: #ededed; /* Text selection color */
+
+  /* Navigation */
+  --color-nav-active: #ebf29c; /* Active navigation item */
+  --color-nav-hover: #454550; /* Navigation hover state */
+
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
