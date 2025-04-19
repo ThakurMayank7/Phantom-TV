@@ -1,6 +1,12 @@
+import Carousel from "@/components/Carousel";
+import { Banner } from "@/utils/types";
+
 export default function Home() {
+  const banners: Banner[] = [{ id: "asdf1" }, { id: "asdasdas" }];
+
   return (
     <div>
+      <Carousel banners={banners} />
       <div className="bg-background text-text-primary min-h-screen p-8">
         <div className="bg-surface p-6 rounded-2xl border border-border">
           <h2 className="text-2xl font-bold text-text-accent">Demon Slayer</h2>

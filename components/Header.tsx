@@ -29,7 +29,7 @@ function Header() {
           <SheetTrigger>
             <GiHamburgerMenu />
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent side="left">
             <SheetHeader>
               <SheetTitle>Are you absolutely sure?</SheetTitle>
               <SheetDescription>
