@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { BsTwitterX } from "react-icons/bs";
 import {
   FaDiscord,
   FaRedditAlien,
@@ -23,17 +24,17 @@ function Header() {
         <button onClick={handleSiderbar}>
           <GiHamburgerMenu />
         </button>
-        <Link href={``}>
+        <Link href={`https://discord.gg/XtyJPHCJ`}>
           <FaDiscord />
         </Link>
-        <Link href={``}>
+        <Link href={`https://t.me/+aHbzEVqR0FI1MjE1`}>
           <FaTelegramPlane />
         </Link>
-        <Link href={``}>
+        <Link href={`https://www.reddit.com/r/suhagrathinvaders/s/XnVXxHc7Gg`}>
           <FaRedditAlien />
         </Link>
-        <Link href={``}>
-          <FaTwitter />
+        <Link href={`https://x.com/invaders15537`}>
+          <BsTwitterX />
         </Link>
 
         <h1
