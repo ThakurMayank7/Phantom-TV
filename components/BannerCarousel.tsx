@@ -3,16 +3,16 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { BannersType } from "@/utils/types";
+import { BannerDataType } from "@/utils/types";
 
-const BannerCarousel = ({ banners }: BannersType) => {
+const BannerCarousel = ({ banners }: { banners: BannerDataType[] }) => {
   // Memoizing the updateCounter function using useCallback
   const slides = banners.map((banner, index) => (
     <div
       key={index}
       className="w-full h-[80vh] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden shadow-lg relative"
       style={{
-        backgroundImage: `url(${banner.thumbnailURL})`,
+        backgroundImage: `url(${banner.bannerURL})`,
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>

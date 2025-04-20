@@ -1,7 +1,11 @@
 "use client";
 
 import { db } from "@/firebase/config";
-import { firebaseHomePageData, HomePageAnimeDatatype } from "@/utils/types";
+import {
+  firebaseHomePageData,
+  HomePageAnimeDatatype,
+  ResponseType,
+} from "@/utils/types";
 import { doc, getDoc } from "firebase/firestore";
 
 export async function fetchHomePageData(): Promise<HomePageAnimeDatatype | null> {
@@ -28,11 +32,23 @@ export async function fetchHomePageData(): Promise<HomePageAnimeDatatype | null>
       return null;
     }
 
-    const responseData: HomePageAnimeDatatype = await res.json();
+    const responseData: ResponseType = await res.json();
 
-    console.log(responseData);
+    console.log({
+      bannerData: data.bannerData,
+      top10: responseData.top10,
+      popular: responseData.popular,
+      trending: responseData.trending,
+    } as HomePageAnimeDatatype);
 
-    return responseData;
+    const result = {
+      bannerData: data.bannerData,
+      top10: responseData.top10,
+      popular: responseData.popular,
+      trending: responseData.trending,
+    } as HomePageAnimeDatatype;
+
+    return result;
   } catch (error) {
     console.error("Error fetching homepage data:", error);
     return null;

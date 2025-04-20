@@ -1,13 +1,3 @@
-export interface Banner {
-  title: string;
-  description: string;
-  thumbnailURL: string;
-}
-
-export interface BannersType {
-  banners: Banner[];
-}
-
 export interface AnimeFetchType {
   title: string;
   title2?: string;
@@ -33,13 +23,20 @@ export interface AnimeMetadata {
   numberOfEpisodes: number;
 }
 
-export interface top10AnimeMetadataType {
+export interface Top10AnimeMetadataType {
   animeMetadata: AnimeMetadata;
   rank: number;
 }
 
 export interface HomePageAnimeDatatype {
-  top10: top10AnimeMetadataType[];
+  top10: Top10AnimeMetadataType[];
+  trending: AnimeMetadata[];
+  popular: AnimeMetadata[];
+  bannerData:BannerDataType[];
+}
+
+export interface ResponseType{
+  top10: Top10AnimeMetadataType[];
   trending: AnimeMetadata[];
   popular: AnimeMetadata[];
 }
@@ -58,4 +55,13 @@ export interface firebaseHomePageData {
   popular: firebaseAnimeData[];
   top10: { data: firebaseAnimeData; rank: number }[];
   trending: firebaseAnimeData[];
+  bannerData: BannerDataType[];
+}
+
+export interface BannerDataType {
+  rank: number;
+  title: string;
+  description: string;
+  linkURL: string;
+  bannerURL: string;
 }

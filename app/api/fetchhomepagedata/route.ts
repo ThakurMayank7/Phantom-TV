@@ -5,14 +5,14 @@ import {
   fetchedEpisodeType,
   firebaseHomePageData,
   HomePageAnimeDatatype,
-  top10AnimeMetadataType,
+  Top10AnimeMetadataType,
 } from "@/utils/types";
 
 export async function POST(req: NextRequest) {
   try {
     const data: firebaseHomePageData = await req.json();
 
-    const top10: top10AnimeMetadataType[] = await Promise.all(
+    const top10: Top10AnimeMetadataType[] = await Promise.all(
       data.top10.map(async (anime) => {
         const episodesRes = await fetch(
           `https://animeapi.skin/episodes?title=${encodeURIComponent(
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
             thumbnailURL: fetchedEpisode.fetchedEpisode.thumbnail_url,
             numberOfEpisodes: episodes,
           },
-        } as top10AnimeMetadataType;
+        } as Top10AnimeMetadataType;
       })
     );
 
