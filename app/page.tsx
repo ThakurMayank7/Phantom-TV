@@ -8,14 +8,13 @@ import {
   Top10AnimeMetadataType,
 } from "@/utils/types";
 import BannerCarousel from "@/components/BannerCarousel";
-import TrendingCarousel from "@/components/TrendingCarousel";
+import FavouriteCarousel from "@/components/TrendingCarousel";
 import { fetchHomePageData } from "@/lib/fetcher";
+import PopularCarousel from "@/components/PopularCarousel";
 
 export default function Home() {
-  const [result, setResult] = useState<AnimeMetadata[] | null>(null);
-
   const [top10, setTop10] = useState<Top10AnimeMetadataType[] | null>(null);
-  const [trending, setTrending] = useState<AnimeMetadata[] | null>(null);
+  const [favourite, setFavourite] = useState<AnimeMetadata[] | null>(null);
   const [popular, setPopular] = useState<AnimeMetadata[] | null>(null);
 
   const [bannerData, setBannerData] = useState<BannerDataType[] | null>(null);
@@ -29,10 +28,8 @@ export default function Home() {
         return;
       }
 
-      console.log(homePageData);
-
       setTop10(homePageData.top10);
-      setTrending(homePageData.trending);
+      setFavourite(homePageData.favourite);
       setPopular(homePageData.popular);
       setBannerData(homePageData.bannerData);
     };
@@ -42,26 +39,76 @@ export default function Home() {
   return (
     <div className="bg-background text-text-primary min-h-screen p-8">
       {bannerData && <BannerCarousel banners={bannerData} />}
+      <div className="flex flex-row gap-2 mt-4">
+        <div className="w-2/6 border border-border-focus p-2 rounded">
+        <h2 className="text-4xl font-semibold text-center my-4">TOP 10</h2>
+          <div className="flex flex-col space-y-4">
+            {top10?.map((anime) => (
+              <div
+                key={anime.rank}
+                className="flex bg-surface-elevated p-2 rounded shadow-md shadow-shadow border-2 border-border-light hover:border-border-focus hover:bg-surface-hover transition-all duration-200"
+              >
+                <div className="flex items-center justify-center w-1/12">
+                  <p className="text-4xl font-bold bg-primary text-text-inverted p-2 rounded-sm shadow-md text-shadow-shadow">
+                    {anime.rank}
+                  </p>
+                </div>
+                <div className="w-5/12 flex items-center justify-center">
+                  <div
+                    className="h-[20vh] aspect-square bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden shadow-lg relative border border-border-focus"
+                    style={{
+                      backgroundImage: `url(${anime.animeMetadata.thumbnailURL})`,
+                    }}
+                  />
+                </div>
+                <div className="w-6/12 flex flex-col items-center justify-center text-center gap-8">
+                  <p className="truncate w-full text-text-primary text-2xl mt-4 font-serif">
+                    {anime.animeMetadata.title}
+                  </p>
 
-      {result && result.toString()}
-      <div className="w-full">
-        <TrendingCarousel />
-      </div>
+                  <button className="text-button-text hover:text-button-secondary-hover focus:text-button-secondary-pressed bg-button-primary hover:bg-button-primary-hover focus:bg-button-primary-pressed hover:cursor-pointer p-2 text-lg font-semibold rounded border-2 border-button-secondary hover:border-border-light">
+                    Watch Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
 
-      <div className="bg-surface p-6 rounded-2xl border border-border mb-6">
-        <h2 className="text-2xl font-bold text-text-accent">Demon Slayer</h2>
-        <p className="text-text-secondary">Season 3 • Action, Fantasy</p>
-        <button className="mt-4 bg-button-primary text-button-text px-4 py-2 rounded hover:bg-button-primary-hover">
-          Watch Now
-        </button>
-      </div>
-      <div className="bg-background text-text-primary min-h-screen p-8">
-        <div className="bg-surface p-6 rounded-2xl border border-border">
-          <h2 className="text-2xl font-bold text-text-accent">Demon Slayer</h2>
-          <p className="text-text-secondary">Season 3 • Action, Fantasy</p>
-          <button className="mt-4 bg-button-primary text-button-text px-4 py-2 rounded hover:bg-button-primary-hover">
-            Watch Now
-          </button>
+          {/* <div className="flex flex-col space-y-4">
+        {top10 && top10.map((anime) => (
+          <div 
+            key={anime.rank} 
+            className="flex items-center rounded-lg overflow-hidden shadow-md border border-border bg-surface hover:bg-surface-hover transition-all duration-200"
+          >
+            <div className="flex items-center justify-center bg-primary text-text-inverted font-bold text-2xl p-4 w-16 h-16">
+              #{anime.rank}
+            </div>
+            
+            <div className="w-32 h-24 flex-shrink-0 border-r border-border">
+              <img 
+                src={anime.animeMetadata.thumbnailURL} 
+                alt={anime.animeMetadata.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            <div className="p-4 flex-grow">
+              <h3 className="text-lg font-semibold text-text-primary truncate">
+                {anime.animeMetadata.title}
+              </h3>
+              <p className="text-text-secondary text-sm">
+                Episodes: {anime.animeMetadata.numberOfEpisodes}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div> */}
+        </div>
+
+        <div className="w-4/6">
+          {favourite && <FavouriteCarousel animes={favourite} />}
+
+          {popular && <PopularCarousel animes={popular} />}
         </div>
       </div>
     </div>

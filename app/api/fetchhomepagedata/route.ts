@@ -11,9 +11,11 @@ import {
 export async function POST(req: NextRequest) {
   try {
     const data: firebaseHomePageData = await req.json();
-
+console.log(data.favourite)
     const top10: Top10AnimeMetadataType[] = await Promise.all(
       data.top10.map(async (anime) => {
+        console.log(anime.data.title);
+
         const episodesRes = await fetch(
           `https://animeapi.skin/episodes?title=${encodeURIComponent(
             anime.data.title
@@ -25,6 +27,8 @@ export async function POST(req: NextRequest) {
         const fetchedEpisode: fetchedEpisodeType = {
           fetchedEpisode: episodesData[0],
         };
+
+        console.log(anime.data.title+fetchedEpisode.fetchedEpisode.thumbnail_url)
 
         return {
           rank: anime.rank,
@@ -61,8 +65,8 @@ export async function POST(req: NextRequest) {
       })
     );
 
-    const trending: AnimeMetadata[] = await Promise.all(
-      data.trending.map(async (anime) => {
+    const favourite: AnimeMetadata[] = await Promise.all(
+      data.favourite.map(async (anime) => {
         const episodesRes = await fetch(
           `https://animeapi.skin/episodes?title=${encodeURIComponent(
             anime.title
@@ -75,6 +79,8 @@ export async function POST(req: NextRequest) {
           fetchedEpisode: episodesData[0],
         };
 
+        console.log(anime.title+fetchedEpisode.fetchedEpisode.thumbnail_url)
+
         return {
           title: anime.title,
           linkURL: anime.linkURL,
@@ -83,9 +89,9 @@ export async function POST(req: NextRequest) {
         } as AnimeMetadata;
       })
     );
-
+console.log(favourite)
     return NextResponse.json(
-      { top10, popular, trending } as HomePageAnimeDatatype,
+      { top10, popular, favourite } as HomePageAnimeDatatype,
       { status: 200 }
     );
   } catch (error) {

@@ -38,14 +38,14 @@ export async function fetchHomePageData(): Promise<HomePageAnimeDatatype | null>
       bannerData: data.bannerData,
       top10: responseData.top10,
       popular: responseData.popular,
-      trending: responseData.trending,
+      favourite: responseData.favourite,
     } as HomePageAnimeDatatype);
 
     const result = {
       bannerData: data.bannerData,
       top10: responseData.top10,
       popular: responseData.popular,
-      trending: responseData.trending,
+      favourite: responseData.favourite,
     } as HomePageAnimeDatatype;
 
     return result;

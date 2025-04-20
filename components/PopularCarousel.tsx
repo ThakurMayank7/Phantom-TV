@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { AnimeMetadata } from "@/utils/types";
 
-const FavouriteCarousel = ({ animes }: { animes: AnimeMetadata[] }) => {
+const PopularCarousel = ({ animes }: { animes: AnimeMetadata[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const slidesToShow = 5; // Changed from 6 to 5
@@ -134,4 +134,4 @@ const AnimeCard = ({ anime }: { anime: AnimeMetadata }) => {
   );
 };
 
-export default FavouriteCarousel;
+export default PopularCarousel;

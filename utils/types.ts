@@ -30,14 +30,14 @@ export interface Top10AnimeMetadataType {
 
 export interface HomePageAnimeDatatype {
   top10: Top10AnimeMetadataType[];
-  trending: AnimeMetadata[];
+  favourite: AnimeMetadata[];
   popular: AnimeMetadata[];
   bannerData:BannerDataType[];
 }
 
 export interface ResponseType{
   top10: Top10AnimeMetadataType[];
-  trending: AnimeMetadata[];
+  favourite: AnimeMetadata[];
   popular: AnimeMetadata[];
 }
 
@@ -54,7 +54,7 @@ export interface firebaseAnimeData {
 export interface firebaseHomePageData {
   popular: firebaseAnimeData[];
   top10: { data: firebaseAnimeData; rank: number }[];
-  trending: firebaseAnimeData[];
+  favourite: firebaseAnimeData[];
   bannerData: BannerDataType[];
 }
 
@@ -64,4 +64,9 @@ export interface BannerDataType {
   description: string;
   linkURL: string;
   bannerURL: string;
+}
+
+export interface NavigationDetailsType {
+title:string;
+linkURL:string
 }
