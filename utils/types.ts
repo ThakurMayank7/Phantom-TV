@@ -32,10 +32,10 @@ export interface HomePageAnimeDatatype {
   top10: Top10AnimeMetadataType[];
   favourite: AnimeMetadata[];
   popular: AnimeMetadata[];
-  bannerData:BannerDataType[];
+  bannerData: BannerDataType[];
 }
 
-export interface ResponseType{
+export interface ResponseType {
   top10: Top10AnimeMetadataType[];
   favourite: AnimeMetadata[];
   popular: AnimeMetadata[];
@@ -66,7 +66,9 @@ export interface BannerDataType {
   bannerURL: string;
 }
 
-export interface NavigationDetailsType {
-title:string;
-linkURL:string
+export interface VideoMetadataType {
+  title: string;
+  linkURL: string;
+  episode:number;
+  thumbnailURL:string;
 }
