@@ -5,15 +5,14 @@ import { useCallback, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { BannersType } from "@/utils/types";
 
-const Carousel = ({ banners }: BannersType) => {
+const BannerCarousel = ({ banners }: BannersType) => {
   // Memoizing the updateCounter function using useCallback
   const slides = banners.map((banner, index) => (
     <div
       key={index}
       className="w-full h-[80vh] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden shadow-lg relative"
       style={{
-        backgroundImage:
-          `url(${banner.thumbnailURL})`,
+        backgroundImage: `url(${banner.thumbnailURL})`,
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
@@ -110,4 +109,4 @@ const Carousel = ({ banners }: BannersType) => {
   );
 };
 
-export default Carousel;
+export default BannerCarousel;
