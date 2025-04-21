@@ -6,11 +6,14 @@ import {
   BannerDataType,
   HomePageAnimeDatatype,
   Top10AnimeMetadataType,
+  VideoMetadataType,
 } from "@/utils/types";
 import BannerCarousel from "@/components/BannerCarousel";
 import FavouriteCarousel from "@/components/TrendingCarousel";
 import { fetchHomePageData } from "@/lib/fetcher";
 import PopularCarousel from "@/components/PopularCarousel";
+import { useNavigateWithDetails } from "@/hooks/useNavigateWithDetails";
+import { useHomePageMetadataStore } from "@/store/HomePageStore";
 
 export default function Home() {
   const [top10, setTop10] = useState<Top10AnimeMetadataType[] | null>(null);
@@ -19,29 +22,51 @@ export default function Home() {
 
   const [bannerData, setBannerData] = useState<BannerDataType[] | null>(null);
 
+  const navigateWithDetails = useNavigateWithDetails();
+
+  const homePageMetadata: HomePageAnimeDatatype | null =
+    useHomePageMetadataStore((state) => state.homePageMetadata);
+
+  const setHomePageMetadata = useHomePageMetadataStore(
+    (state) => state.setHomePageMetadata
+  );
+
   useEffect(() => {
-    const fetchHomePage = async () => {
-      const homePageData: HomePageAnimeDatatype | null =
-        await fetchHomePageData();
+    if (homePageMetadata) {
+      setTop10(homePageMetadata.top10);
+      setFavourite(homePageMetadata.favourite);
+      setPopular(homePageMetadata.popular);
+      setBannerData(homePageMetadata.bannerData);
+    } else {
+      const fetchHomePage = async () => {
+        const homePageData: HomePageAnimeDatatype | null =
+          await fetchHomePageData();
 
-      if (!homePageData) {
-        return;
-      }
+        if (!homePageData) {
+          return;
+        }
 
-      setTop10(homePageData.top10);
-      setFavourite(homePageData.favourite);
-      setPopular(homePageData.popular);
-      setBannerData(homePageData.bannerData);
-    };
-    fetchHomePage();
-  }, []);
+        setTop10(homePageData.top10);
+        setFavourite(homePageData.favourite);
+        setPopular(homePageData.popular);
+        setBannerData(homePageData.bannerData);
+
+        setHomePageMetadata(homePageData);
+      };
+      fetchHomePage();
+    }
+  }, [homePageMetadata, setHomePageMetadata]);
+
+  if (!homePageMetadata) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="bg-background text-text-primary min-h-screen p-8">
       {bannerData && <BannerCarousel banners={bannerData} />}
       <div className="flex flex-row gap-2 mt-4">
         <div className="w-2/6 border border-border-focus p-2 rounded">
-        <h2 className="text-4xl font-semibold text-center my-4">TOP 10</h2>
+          <h2 className="text-4xl font-semibold text-center my-4">TOP 10</h2>
           <div className="flex flex-col space-y-4">
             {top10?.map((anime) => (
               <div
@@ -66,7 +91,17 @@ export default function Home() {
                     {anime.animeMetadata.title}
                   </p>
 
-                  <button className="text-button-text hover:text-button-secondary-hover focus:text-button-secondary-pressed bg-button-primary hover:bg-button-primary-hover focus:bg-button-primary-pressed hover:cursor-pointer p-2 text-lg font-semibold rounded border-2 border-button-secondary hover:border-border-light">
+                  <button
+                    className="text-button-text hover:text-button-secondary-hover focus:text-button-secondary-pressed bg-button-primary hover:bg-button-primary-hover focus:bg-button-primary-pressed hover:cursor-pointer p-2 text-lg font-semibold rounded border-2 border-button-secondary hover:border-border-light"
+                    onClick={() =>
+                      navigateWithDetails({
+                        title: anime.animeMetadata.title,
+                        linkURL: anime.animeMetadata.linkURL,
+                        episode: anime.animeMetadata.numberOfEpisodes,
+                        thumbnailURL: anime.animeMetadata.thumbnailURL,
+                      } as VideoMetadataType)
+                    }
+                  >
                     Watch Now
                   </button>
                 </div>
