@@ -13,6 +13,10 @@ function WatchPage() {
 
   const [currentEpisode, setCurrentEpisode] = useState<number>(1);
 
+  // const [relatedVideos, setRelatedVideos] = useState<VideoMetadataType | null>(
+  //   null
+  // );
+
   useEffect(() => {
     if (!videoMetadata) {
       router.push("/");
@@ -24,6 +28,7 @@ function WatchPage() {
   }
 
   return (
+    // <div>
     <div className="flex flex-row gap-2 h-[80vh]">
       <div className="w-3/12 bg-surface rounded h-full p-2 flex flex-col border border-border-focus">
         <h2 className="mb-2 text-lg text-center">List of Episodes</h2>
@@ -33,9 +38,9 @@ function WatchPage() {
               <span
                 key={i}
                 className={`${
-                  currentEpisode == i+1 ? "bg-amber-500" : "bg-border-focus"
+                  currentEpisode == i + 1 ? "bg-amber-500" : "bg-border-focus"
                 } text-text-inverted px-2 py-1 text-center hover:bg-gray-100 cursor-pointer rounded`}
-                onClick={() => setCurrentEpisode(i+1)}
+                onClick={() => setCurrentEpisode(i + 1)}
               >
                 {i + 1}
               </span>
@@ -43,7 +48,7 @@ function WatchPage() {
           </div>
         </div>
       </div>
-      <div className="w-7/12 bg-surface rounded">
+      <div className="w-7/12 bg-surface rounded flex items-center justify-center">
         <VideoPlayer title={videoMetadata.linkURL} episode={currentEpisode} />
       </div>
       <div className="w-2/12 bg-surface rounded p-3 flex flex-col justify-center text-center">
@@ -77,6 +82,10 @@ function WatchPage() {
         </div>
       </div>
     </div>
+    //   <div>
+    //     <p>Watch More</p>
+    //   </div>
+    // </div>
   );
 }
 

@@ -3,22 +3,48 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { BannerDataType } from "@/utils/types";
+import { BannerDataType, VideoMetadataType } from "@/utils/types";
+import { useNavigateWithDetails } from "@/hooks/useNavigateWithDetails";
 
 const BannerCarousel = ({ banners }: { banners: BannerDataType[] }) => {
+  const navigateWithDetails = useNavigateWithDetails();
+
   // Memoizing the updateCounter function using useCallback
   const slides = banners.map((banner, index) => (
     <div
       key={index}
-      className="w-full h-[80vh] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden shadow-lg relative"
+      className="w-full h-[80vh] bg-cover bg-center bg-no-repeat overflow-hidden shadow-lg relative"
       style={{
         backgroundImage: `url(${banner.bannerURL})`,
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 p-6 w-full">
-        <h3 className="text-text-primary text-2xl font-bold">{banner.title}</h3>
-        <p className="text-text-secondary mt-2">{banner.description}</p>
+      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent"></div>
+      <div
+        className="absolute bottom-0 left-0 p-6 w-1/3 ml-16 flex flex-col 
+      justify-center"
+      >
+        <h2 className="text-lg text-text-accent">#{index + 1} Spotlight</h2>
+        <br />
+        <h3 className="text-white text-3xl font-bold">{banner.title}</h3>
+        <br />
+        <p className="text-gray-100 mt-2 line-clamp-4 overflow-hidden">
+          {banner.description}
+        </p>
+        <br />
+        <button
+          className="text-button-text hover:text-button-secondary-hover focus:text-button-secondary-pressed bg-button-primary hover:bg-button-primary-hover focus:bg-button-primary-pressed hover:cursor-pointer p-2 text-lg font-semibold rounded border-2 border-button-secondary hover:border-border-light"
+          onClick={() =>
+            navigateWithDetails({
+              title: banner.title,
+              linkURL: banner.linkURL,
+              episode: 100,
+              thumbnailURL: banner.bannerURL,
+            } as VideoMetadataType)
+          }
+        >
+          Watch Now
+        </button>
       </div>
     </div>
   ));
@@ -78,14 +104,14 @@ const BannerCarousel = ({ banners }: { banners: BannerDataType[] }) => {
         <>
           <Button
             onClick={goToPrevious}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-pallette6 hover:bg-pallette3 p-3 rounded shadow-lg"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-button-primary hover:bg-button-primary-hover text-text-inverted p-3 rounded shadow-lg hover:cursor-pointer"
           >
             <ChevronLeft /> {/* Left arrow */}
           </Button>
 
           <Button
             onClick={goToNext}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-pallette6 hover:bg-pallette3 p-3 rounded shadow-lg"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-button-primary hover:bg-button-primary-hover text-text-inverted p-3 rounded shadow-lg hover:cursor-pointer"
           >
             <ChevronRight /> {/* Right arrow */}
           </Button>

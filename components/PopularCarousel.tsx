@@ -4,11 +4,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { AnimeMetadata } from "@/utils/types";
+import AnimeCard from "./AnimeCard";
 
 const PopularCarousel = ({ animes }: { animes: AnimeMetadata[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const slidesToShow = 5; // Changed from 6 to 5
+  const slidesToShow = 4;
 
   // Calculate maximum index based on the number of animes and slides to show
   const maxIndex = Math.max(0, animes.length - slidesToShow);
@@ -45,10 +46,10 @@ const PopularCarousel = ({ animes }: { animes: AnimeMetadata[] }) => {
       <Button
         onClick={goToPrevious}
         disabled={isAnimating || currentIndex === 0}
-        className={`flex-shrink-0 mr-4 p-3 rounded shadow-lg z-10 ${
+        className={`flex-shrink-0 mr-4 p-3 rounded shadow-lg z-10 text-text-inverted ${
           currentIndex === 0
-            ? "bg-gray-300 cursor-not-allowed opacity-50"
-            : "bg-pallette6 hover:bg-pallette3"
+            ? "bg-button-disabled cursor-not-allowed opacity-50"
+            : "bg-button-primary hover:bg-button-primary-hover hover:cursor-pointer"
         }`}
       >
         <ChevronLeft />
@@ -59,7 +60,7 @@ const PopularCarousel = ({ animes }: { animes: AnimeMetadata[] }) => {
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
-            transform: `translateX(-${currentIndex * (100 / 5)}%)`, // Updated for 5 slides
+            transform: `translateX(-${currentIndex * (100 / 4)}%)`,
             gap: "1rem", // Using style for gap instead of className to ensure consistent spacing
           }}
         >
@@ -67,7 +68,7 @@ const PopularCarousel = ({ animes }: { animes: AnimeMetadata[] }) => {
             <div
               key={index}
               style={{
-                width: `calc(${100 / 5}% - ${4 / 5}rem)`, // Updated for 5 slides, adjusted gap calculation
+                width: `calc(${100 / 4}% - ${3 / 4}rem)`, // adjusted gap calculation
                 flexShrink: 0,
                 padding: "0 0.25rem",
               }}
@@ -82,10 +83,10 @@ const PopularCarousel = ({ animes }: { animes: AnimeMetadata[] }) => {
       <Button
         onClick={goToNext}
         disabled={isAnimating || currentIndex >= maxIndex}
-        className={`flex-shrink-0 ml-4 p-3 rounded shadow-lg z-10 ${
+        className={`flex-shrink-0 ml-4 p-3 rounded shadow-lg z-10 text-text-inverted ${
           currentIndex >= maxIndex
-            ? "bg-gray-300 cursor-not-allowed opacity-50"
-            : "bg-pallette6 hover:bg-pallette3"
+            ? "bg-button-disabled cursor-not-allowed opacity-50"
+            : "bg-button-primary hover:bg-button-primary-hover hover:cursor-pointer"
         }`}
       >
         <ChevronRight />
@@ -111,25 +112,6 @@ const PopularCarousel = ({ animes }: { animes: AnimeMetadata[] }) => {
           ))}
         </div>
       )}
-    </div>
-  );
-};
-
-// Separate component for an anime card
-const AnimeCard = ({ anime }: { anime: AnimeMetadata }) => {
-  return (
-    <div
-      className="aspect-square bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden shadow-lg relative"
-      style={{
-        backgroundImage: `url(${anime.thumbnailURL})`,
-      }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 p-4 w-full">
-        <h3 className="text-text-primary text-lg font-bold truncate">
-          {anime.title}
-        </h3>
-      </div>
     </div>
   );
 };
