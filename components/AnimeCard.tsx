@@ -5,7 +5,13 @@ import { AnimeMetadata, VideoMetadataType } from "@/utils/types";
 import React from "react";
 import { FaRegCirclePlay } from "react-icons/fa6";
 
-function AnimeCard({ anime }: { anime: AnimeMetadata }) {
+function AnimeCard({
+  anime,
+  handleSearchNavigation,
+}: {
+  anime: AnimeMetadata;
+  handleSearchNavigation?: VoidFunction;
+}) {
   const navigateWithDetails = useNavigateWithDetails();
 
   return (
@@ -14,14 +20,18 @@ function AnimeCard({ anime }: { anime: AnimeMetadata }) {
       style={{
         backgroundImage: `url(${anime.thumbnailURL})`,
       }}
-      onClick={() =>
+      onClick={() => {
+        if (handleSearchNavigation) {
+          handleSearchNavigation();
+          return;
+        }
         navigateWithDetails({
           title: anime.title,
           linkURL: anime.linkURL,
           episode: anime.numberOfEpisodes,
           thumbnailURL: anime.thumbnailURL,
-        } as VideoMetadataType)
-      }
+        } as VideoMetadataType);
+      }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80"></div>
 

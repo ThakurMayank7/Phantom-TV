@@ -1,3 +1,4 @@
+import { AnimeFetchType } from "@/utils/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -9,36 +10,21 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // Step 1: Search for the anime
+    console.log("search title:", title);
+
     const searchRes = await fetch(
       `https://animeapi.skin/search?q=${encodeURIComponent(title)}`
     );
     const searchData = await searchRes.json();
 
-    // Step 2: Try to get episode list for the first result (if any)
-    if (Array.isArray(searchData) && searchData.length > 0) {
-      const animeTitle = searchData[0].title; // Use the returned title for accuracy
-
-      const episodesRes = await fetch(
-        `https://animeapi.skin/episodes?title=${encodeURIComponent(animeTitle)}`
-      );
-      const episodesData = await episodesRes.json();
-
-      console.log(episodesData)
-
-      if (Array.isArray(episodesData)) {
-        console.log(`Total episodes for "${animeTitle}":`, episodesData.length);
-      }
+    const data: AnimeFetchType[] = searchData as AnimeFetchType[];
+    if (!data || data.length === 0) {
+      return NextResponse.json([] as AnimeFetchType[], { status: 200 });
     }
 
-    console.log("search data:",searchData)
-
-    return NextResponse.json(searchData);
+    return NextResponse.json(data, { status: 200 });
   } catch (err) {
     console.error("Fetch error:", err);
-    return NextResponse.json(
-      { error: "Failed to fetch from AnimeAPI" },
-      { status: 500 }
-    );
+    return NextResponse.json([] as AnimeFetchType[], { status: 500 });
   }
 }

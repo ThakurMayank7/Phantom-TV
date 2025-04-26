@@ -2,18 +2,6 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { BsTwitterX } from "react-icons/bs";
-import { FaDiscord, FaRedditAlien, FaTelegramPlane } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 function Header() {
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -46,40 +34,11 @@ function Header() {
 
       <div className="relative container mx-auto px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-4 mr-auto">
-          <Sheet>
-            <SheetTrigger>
-              <GiHamburgerMenu size={40} />
-            </SheetTrigger>
-            <SheetContent side="left">
-              <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </SheetDescription>
-              </SheetHeader>
-            </SheetContent>
-          </Sheet>
           <Link
             className="text-center text-5xl py-2 font-black hover:cursor-pointer"
             href="/"
           >
             Phantom TV
-          </Link>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <Link href="https://discord.gg/XtyJPHCJ">
-            <FaDiscord size={24} />
-          </Link>
-          <Link href="https://t.me/+aHbzEVqR0FI1MjE1">
-            <FaTelegramPlane size={24} />
-          </Link>
-          <Link href="https://www.reddit.com/r/suhagrathinvaders/s/XnVXxHc7Gg">
-            <FaRedditAlien size={24} />
-          </Link>
-          <Link href="https://x.com/invaders15537">
-            <BsTwitterX size={24} />
           </Link>
         </div>
       </div>
